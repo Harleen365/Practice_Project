@@ -24,6 +24,7 @@ dotenv. config();
 connectDb();
 const app=express();
 const port =process.env.PORT || 5000; 
+app.set('view engine','hbs');
 
 
 app.use(express.json());
@@ -33,7 +34,23 @@ app.use(cors());
 app.get('/',(req,res)=>{
     res.send("working");
 });
+app.get("/home",(req,res)=>{
+    res.render("home",{
+       username:"harleen",
+       posts:"abcd"
+    })
+})
+app.get("/alluser",(req,res)=>{
+    const users=[
+        {username:"harleen",age:20},
+        {username:"ishi",age:30},
+        {username:"harleen2",age:20}
 
+    ];
+    res.render("alluser",{
+       users:users
+    });
+});
 //error handling middleware 
 app.use(errorHandler)
 
