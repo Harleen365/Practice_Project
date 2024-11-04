@@ -58,6 +58,7 @@ app.use(errorHandler)
 
 //
 app.use("/api/register",require("./routes/userRoutes"));
+app.use("/api/details",require("./routes/doctorDetails"));
 
 //app config start 
 app.listen(port,()=>{
