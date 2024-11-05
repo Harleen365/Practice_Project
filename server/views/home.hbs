@@ -9,6 +9,13 @@
     <h1>this is my home page</h1>
     {{username}}
     {{posts}}
+
+    <div>
+        <form action="/profile" method="post" enctype="multipart/form-data">
+               <input type="file" name="avatar" />
+               <input type="submit" value="Upload">
+   </form>
+    </div>
     
 </body>
 </html>
