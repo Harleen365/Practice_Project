@@ -89,7 +89,17 @@ app.use("/api/details",require("./routes/doctorDetails"));
 app.listen(port,()=>{
     console.log(`server running on port http://localhost:${port}`);
 })
-    */
+    
+*/
+
+
+
+
+
+
+
+
+
 
 const express = require("express");
 const mongoose = require("mongoose");
@@ -162,6 +172,8 @@ app.post('/profile', upload.single('avatar'), async (req, res) => {
 
 // Error handling middleware
 app.use(errorHandler);
+app.use("/api/register",require("./routes/userRoutes"));
+app.use("/api/details",require("./routes/doctorDetails"));
 
 // Start the server
 app.listen(PORT, () => {
