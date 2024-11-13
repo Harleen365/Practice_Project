@@ -1,14 +1,12 @@
-const express=require("express");
-const router=express.Router();
-const{
-    AccountDetails,getAccount
-}=require("../controllers/myAccountDetails");
+const express = require("express");
+const router = express.Router();
+const { AccountDetails, getAccount } = require("../controllers/myAccountDetails");
+const { validateJwtToken } = require("../middlewares/jwtMiddleware");
 
-//route for registration
-router.post("/accdetails",AccountDetails);
+// POST route for account creation and token generation
+router.post("/accdetails", AccountDetails);
 
-// GET route for retrieving doctor details
-router.get("/accdetails", getAccount); // New GET route
-//route for user login 
-//router.post("/login",loginUser);
-module.exports=router;
+// GET route for fetching accounts, protected by JWT
+router.get("/accdetails", validateJwtToken, getAccount);
+
+module.exports = router;

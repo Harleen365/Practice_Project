@@ -1,22 +1,22 @@
 const asyncHandler = require("express-async-handler");
-const bcrypt = require("bcrypt");
-const account=require("../model/myAccountModel");
+const jwt = require("jsonwebtoken");
+const Account = require("../model/myAccountModel");
 require("dotenv").config();
 
-const AccountDetails = asyncHandler(async(req,res)=>{
-    const {id , name ,phoneNumber,age, gender, address}=req.body;
-    if(!id || !name || !phoneNumber || !age || !gender || !address){
+const AccountDetails = asyncHandler(async (req, res) => {
+    const { id, name, phoneNumber, age, gender, address } = req.body;
+
+    if (!id || !name || !phoneNumber || !age || !gender || !address) {
         res.status(400);
         throw new Error("Please provide all fields");
     }
 
-    const AccountExists = await account.findOne({id});
-    if(AccountExists){
-        return res.status(400).json({message: "user already exists"});
+    const accountExists = await Account.findOne({ id });
+    if (accountExists) {
+        return res.status(400).json({ message: "User already exists" });
     }
 
-    //create the user
-    const Account = await account.create({
+    const newAccount = await Account.create({
         id,
         name,
         phoneNumber,
@@ -25,16 +25,21 @@ const AccountDetails = asyncHandler(async(req,res)=>{
         address,
     });
 
-    res.status(201).json({message:"Account details found",Account});
+    const token = jwt.sign({ id: newAccount._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+
+    res.status(201).json({
+        message: "Account created successfully",
+        token,
+        user: { id: newAccount.id, name: newAccount.name }
+    });
 });
 
-// GET route for retrieving all doctor details
 const getAccount = asyncHandler(async (req, res) => {
-    const accounts = await account.find({});
+    const accounts = await Account.find({});
     res.status(200).json(accounts);
 });
 
-
-module.exports={AccountDetails,
+module.exports = {
+    AccountDetails,
     getAccount,
-}
+};

@@ -1,34 +1,34 @@
 const mongoose = require("mongoose");
 const AccountSchema = mongoose.Schema(
     {
-        id:{
-            type:String,
-            require:[true,"please add your id"],
+        id: {
+            type: String,
+            required: [true, "Please add your id"],
         },
-        name:{
-            type:String,
-            require:[true,"please add your name"],
+        name: {
+            type: String,
+            required: [true, "Please add your name"],
         },
-        phoneNumber:{
-            type:String,
-            require:[true,"please add your phonenumber"],
+        phoneNumber: {
+            type: String,
+            required: [true, "Please add your phone number"],
         },
-        age:{
-            type:String,
-            require:[true,"please add your age"],
+        age: {
+            type: String,
+            required: [true, "Please add your age"],
         },
-        gender:{
-            type:String,
-            require:[true,"please add your gender"],
+        gender: {
+            type: String,
+            required: [true, "Please add your gender"],
         },
-        address:{
-            type:String,
-            require:[true,"please add your address"],
+        address: {
+            type: String,
+            required: [true, "Please add your address"],
         },
     },
     {
-        timestamps:true,
+        timestamps: true,
     }
 );
 
-module.exports = mongoose.model("account",AccountSchema);
+module.exports = mongoose.model("account", AccountSchema);
