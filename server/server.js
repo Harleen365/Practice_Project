@@ -175,6 +175,7 @@ app.use(errorHandler);
 app.use("/api/register",require("./routes/userRoutes"));
 app.use("/api/details",require("./routes/doctorDetails"));
 app.use("/api/accdetails",require("./routes/myAccount"));
+app.use("/api/newsletter",require("./routes/newsletterRoutes"));
 
 // Start the server
 app.listen(PORT, () => {
